@@ -1,0 +1,33 @@
+
+
+CC = gcc
+CFLAGS = -Wall
+LIBS = -lgdi32 -luser32
+
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
+
+
+SRC_FILES = $(SRC_DIR)/main.c $(SRC_DIR)/roman.c
+OBJ_FILES = $(SRC_FILES:.c=.o)
+
+
+TARGET = $(BIN_DIR)/RomanConverter.exe
+
+
+all: $(TARGET)
+
+
+$(TARGET): $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -o $@ $(LIBS)
+
+
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+clean:
+	rm -f $(OBJ_DIR)/*.o $(TARGET)
+
+.PHONY: all clean
